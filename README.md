@@ -10,8 +10,7 @@ The system has 4 free spaced lasers that are aligned using a laser combiner. The
 
 There are two modular emission areas(Mod_Em), this permits image manipulation before it is acquired by the camera. Mod_Em1 is the second deck in a dual deck IX83 microscope body. The second is space between the microscope body and the camera.
 
-## TODOS
-
+## TODO:
 * component lists
 * software requirements
 * good papers

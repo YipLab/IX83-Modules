@@ -9,10 +9,10 @@ Traditional focusing relies on moving the objective towards or away from the sam
 The RF module is placed in between the microscope body and camera (Mod_Em2). It consists of 2 pairs of realys. Remote focus is accomplished by moving one of the objectives along the optical axis.
 
 
-# Adapted from:
-[RF paper](https://calico.github.io/remote_refocus/)
+## Adapted from:
+A. Millett-Sikking, NH. Thayer, A. Bohnert, AG. York, **Remote refocus enables class-leading spatiotemporal resolution in 4D optical microscopy**, [doi:10.5281/zenodo.1146083](https://calico.github.io/remote_refocus/)
 
-#TODO:
+## TODO:
 * component list
 * software
 * z-calibration
