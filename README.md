@@ -13,6 +13,7 @@ There are two modular emission areas(Mod_Em), this permits image manipulation be
 ## Components
 
 ### Lasers
+--------- | ---------
 405 Laser | Coherent Cube 405 nm 25 mW
 488 Laser | Coherent Sapphire 488 nm 200 mW
 561 Laser | Laser Quantum GEM 561 nm 200 mW
