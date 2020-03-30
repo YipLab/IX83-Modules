@@ -5,3 +5,9 @@ Traditional Single Molecule Localization Micrsocopy (SMLM) techniques have gener
 ![CylindricalSMLM schematic](https://github.com/YipLab/IX83-Modules/blob/master/CylindricalSMLM/images/schematic.png)
 
 The Motorized Cylindrical SMLM module is placed in between the camera and microscope body, Mod_Em2.  The cylindrical lens is attached to a stepper motor that actuates back and forth movement along the optical axis. By moving the cylindrical lens, we are able to tune the axial range and sensitivity of the system.
+
+## Suggested Reads
+
+B. Huang, W. Wang, M. Bates and X. Zhuang, **Three-dimensional Super-resolution Imaging by Stochastic Optical Reconstruction Microscopy**, [10.1126/science.1153529](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2633023/?report=classic)
+
+Kuhlman Lab, **3D Camera Mount**, [Website](http://kuhlman.physics.illinois.edu/resources_camera_mount.html)
