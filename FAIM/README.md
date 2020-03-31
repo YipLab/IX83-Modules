@@ -2,8 +2,9 @@
 
 This module observes the fluoresence emission polarization. An [Optosplit](https://www.cairn-research.co.uk/product/optosplit-ii/) was used to separate parallel and perpendicular emissions onto the camera sensor. Post processing is then used to split the image and extract ratiometric information.
 
-
-<img src="https://github.com/YipLab/IX83-Modules/blob/master/FAIM/images/schematic.png" alt="FAIM Schematic" width="50%">
+<p align="center">
+	<img src="https://github.com/YipLab/IX83-Modules/blob/master/FAIM/images/schematic.png" alt="FAIM Schematic" width="50%">
+</p>
 
 
 Inside the optosplit, the emission light is split into two paths. A broadband polarized beam splitter cube (PBS) is used to separate the polarization from the emission light. Linearly polarized filters are used to further clean up the polarizations.
