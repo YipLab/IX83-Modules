@@ -3,7 +3,9 @@
 The module adds a Digital Mirror Device (DMD) into the excitation beam path. This will allow excitation patterning at the back focal plane(BFP) and the imaging plane of the objective.
 
 
-![DMD Schematic](https://github.com/YipLab/IX83-Modules/blob/master/DMD/images/schematic.png)
+<p align="center">
+	<img src="https://github.com/YipLab/IX83-Modules/blob/master/DMD/images/schematic.png" alt="DMD Schematic" width="30%">
+</p>
 
 
 These DMD rotate at a 12 degree angle (ON) or flat (OFF). Hence the incoming angle towards the DMD is 24 degrees. A pair of lenses are used to relay the image plane to the beamsplitter, which generates an image on the image plane of the objective. The second lens can be removed and the DMD image will be projected onto the BFP of the objective.

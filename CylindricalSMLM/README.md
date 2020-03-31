@@ -2,7 +2,12 @@
 
 Traditional Single Molecule Localization Micrsocopy (SMLM) techniques have generate a 2D super-resolution image. Several tehcniques have been developed for 3D SMLM, most revolve around PSF engineering. Perhaps the most simple method to 3D SMLM is the addition of a cylindrical lens that introduces astigmatism to the PSF. 
 
-![CylindricalSMLM schematic](https://github.com/YipLab/IX83-Modules/blob/master/CylindricalSMLM/images/schematic.png)
+
+<p align="center">
+	<img src="https://github.com/YipLab/IX83-Modules/blob/master/CylindricalSMLM/images/schematic.png" alt="CylindricalSMLM schematic" width="50%">
+</p>
+
+
 
 The Motorized Cylindrical SMLM module is placed in between the camera and microscope body, Mod_Em2.  The cylindrical lens is attached to a stepper motor that actuates back and forth movement along the optical axis. By moving the cylindrical lens, we are able to tune the axial range and sensitivity of the system.
 
