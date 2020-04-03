@@ -15,5 +15,3 @@ A. Millett-Sikking, NH. Thayer, A. Bohnert, AG. York, **Remote refocus enables c
 ## TODO:
 * component list
 * software
-* z-calibration
-* lateral calibration
