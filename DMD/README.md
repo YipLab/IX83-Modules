@@ -18,7 +18,7 @@ JL. Tang, JH. Ren and KY. Han, **Florescence imaging with tailored light**, [htt
 
 
 ## TODO:
+* EXPERIMENT: New Design
 * component list
-* new design
 * pattern creation scripts
 * setup
