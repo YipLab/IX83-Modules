@@ -1,0 +1,157 @@
+String [] lasers = new String [] {"405", "488", "561", "670"};
+String [] ports = new String [] {"COM28", "COM22", "COM26", "COM30"};
+double [] maxPwr = new double [] {55.0, 190.0, 190.0, 160.0};
+double [] minPwr = new double [] {2.0,20.0,5.0,5.0};
+
+//TODO: Check COM PORTS FOR 670
+//TODO: CHeck on and off values.
+
+
+/* User Interface */
+f = new JFrame("Laser Control Centre");
+f.getRootPane().setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+cp = f.getContentPane(); 
+cp.setLayout(new GridBagLayout()); 
+
+/* Laser Interface */
+void connectLasers(name, port) { //Connect Lasers using Serial Ports
+	try {
+		mmc.loadDevice(name, "SerialManager", port);
+		mmc.setProperty(name, "StopBits", "1");
+		mmc.setProperty(name, "Parity", "None");
+		if (name == lasers[0] || name == lasers[1]) {
+			mmc.setProperty(name, "BaudRate", "19200");
+		} else {
+			mmc.setProperty(name, "BaudRate", "9600");
+		}
+		mmc.setProperty(name, "AnswerTimeout", "1000");
+		mmc.setProperty(name, "Handshaking", "Off");
+		mmc.initializeDevice(name);
+	} catch (Exception ex) {
+		JOptionPane.showMessageDialog(f, "Could not load: " + name + ". From Port: " + port);
+	}
+}
+
+void disconnectLaser(name) { //Unload Device
+	if (checkPorts(name)) {
+		mmc.unloadDevice(name);
+	}
+}
+
+boolean checkPorts(name) { //Check to see if Device is Loaded
+	devices = mmc.getLoadedDevices();
+	for (i=0;i<devices.size();i++) {
+		if (devices.get(i).equals(name)) {return true;}
+	}
+	return false;
+}
+
+/* Labels */
+labLaser = new JLabel("Laser");
+labPower = new JLabel("Power");
+labOn = new JLabel("Value");
+
+/* Pwr Sliders */
+JSlider [] sliders = new JSlider[] {new JSlider(0,100,0),new JSlider(0,100,0),new JSlider(0,100,0),new JSlider(0,100,0)};
+cSlider = new GridBagConstraints(1,0,1,1,1,0.5,GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10);
+
+/* Pwr On */
+JRadioButton [] powerBut = new JRadioButton[] {new JRadioButton(lasers[0]),new JRadioButton(lasers[1]),new JRadioButton(lasers[2]),new JRadioButton(lasers[3])};
+cPwr = new GridBagConstraints(0,0,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10);
+
+/* Values */
+JTextField [] powerTxt = new JTextField[] {new JTextField("0"), new JTextField("0"), new JTextField("0"), new JTextField("0")};
+cTxt = new GridBagConstraints(2,0,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10);
+
+int findIndex (arr, obj) {
+	for (i=0;i<arr.length;i++){
+		if (obj == arr[i]) { 
+			return i; 
+		}
+	}
+}
+
+radioEvent = new ItemListener() {
+	itemStateChanged(event) {
+		state = event.getStateChange();
+		item = event.getItem();
+		k = findIndex(powerBut, item); //INDEX OF LASER
+		if (state == ItemEvent.SELECTED) {
+			sliders[k].setEnabled(true);
+			connectLasers(lasers[k], ports[k]);
+			if (k == 3) {mmc.sleep(1500);} //Wait for Arduino to respond
+			if (checkPorts(lasers[k])) {
+				print("Turn on : " + lasers[k] + "nm"); //Turn on Laser
+				if (k == 0 || k == 1) {
+					mmc.setSerialPortCommand(lasers[k],"L=1","\r\n"); //LASER ON
+				} else {
+					mmc.setSerialPortCommand(lasers[k],"on","\r\n"); //LASER ON
+				}
+			}
+		} else {
+			sliders[k].setValue(0);
+			sliders[k].setEnabled(false);
+			mmc.sleep(500);
+			print("Turn off: " + lasers[k] + "nm"); //Turn off Laser
+			if (checkPorts(lasers[k])) {
+				if (k == 0 || k == 1) {
+					mmc.setSerialPortCommand(lasers[k],"L=0","\r\n"); //LASER OFF
+				} else {
+					mmc.setSerialPortCommand(lasers[k],"off","\r\n"); //LASER OFF
+				}
+				disconnectLaser(lasers[k]);
+			}
+		}
+	}
+};
+
+sliderEvent = new ChangeListener() {
+	stateChanged(event) {
+		source = event.getSource();
+		k = findIndex(sliders, source);
+		powerTxt[k].setText(String.valueOf(sliders[k].getValue()));
+		power = (maxPwr[k]-minPwr[k])*source.getValue()/100.+minPwr[k];
+		if (!source.getValueIsAdjusting()) {
+			print(lasers[k] + "nm at " + power + " mW"); //Change Power
+			if (k == 0 || k == 1) {
+				mmc.setSerialPortCommand(lasers[k],"P="+ String.valueOf(power) ,"\r\n"); //LASER POWER CHANGED
+			} else {
+				mmc.setSerialPortCommand(lasers[k],"power="+ String.valueOf(power) ,"\r\n"); //LASER POWER CHANGED
+			}
+		}
+	}
+};
+
+for (i=0; i<lasers.length;i++) {
+	powerBut[i].addItemListener(radioEvent); //For when a power button is selected
+	sliders[i].addChangeListener(sliderEvent);
+}
+
+cp.add(labLaser, cPwr);
+cp.add(labPower, cSlider);
+cp.add(labOn, cTxt);
+
+for (i = 0; i < 4; i++) {	
+	cSlider.gridy = i+1;
+	cPwr.gridy = i+1;
+	cTxt.gridy = i+1;
+	
+	cp.add(powerBut[i], cPwr); 
+	cp.add(sliders[i], cSlider); 
+	cp.add(powerTxt[i], cTxt);
+
+	sliders[i].setEnabled(false);
+	powerTxt[i].setEnabled(false);
+}
+
+f.pack(); 
+f.show(); 
+
+f.addWindowListener(new WindowAdapter() {
+  public void windowClosing(WindowEvent e) {
+    for (i=0; i<lasers.length;i++) {
+    	powerBut[i].setSelected(false); //TURN OFF LASERS WHEN CLOSING
+    }
+    f.dispose();
+  }
+});
