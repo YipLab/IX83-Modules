@@ -24,6 +24,14 @@ L2 | Achromatic Doublet f = 250 mm ([AC254-250-A-ML](https://www.thorlabs.com/th
 L3 | Achromatic Doublet f = 300 mm ([AC254-300-A-ML](https://www.thorlabs.com/thorproduct.cfm?partnumber=AC254-300-A-ML))  
 IX83 | Olympus IX83 Dual Deck
 
+### Objectives
+5x | LMPlanFLN 5x/0.13
+10x | UPlanFl 10x/0.30
+20x | LCPlanFl 20x/0.40
+40x | LCPlanFl 40x/0.60
+60x | PlanApo 60x/1.4 Oil
+100x | UApoN 100x/1.49 Oil
+
 ### Camera
 CAM | Photometrics Prime BSI sCMOS
 
