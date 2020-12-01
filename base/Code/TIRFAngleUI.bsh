@@ -1,0 +1,131 @@
+import java.lang.Math;
+import java.text.DecimalFormat;
+
+//double [] lasers = new double [] {405., 488., 561., 670.};
+String ports = "COM24";
+
+double n1 = 1.52;
+double n2 = 1.36;
+double currDis = 0.0;
+
+//TODO: CHeck on and off values.
+
+/* User Interface */
+f = new JFrame("Laser Angle Control");
+f.getRootPane().setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+cp = f.getContentPane(); 
+cp.setLayout(new GridBagLayout()); 
+
+double getDistance(ang) {
+	//return ang*0.0367; //From Book 1 Page 182
+	return -0.0004*ang^2+0.0915*ang; //calibrated from 02-067
+}
+
+double getCrit(n1, n2) {
+	return Math.toDegrees(Math.asin(n2/n1));
+}
+
+double getDepth(wave, angle ,n1, n2) {
+	return wave/(4*Math.PI*Math.sqrt(Math.pow((n1*Math.sin(Math.toRadians(angle))),2)-Math.pow(n2,2)));
+}
+
+/* Angle Interface */
+void connectMotor(port) { //Connect Lasers using Serial Ports
+	try {
+		mmc.loadDevice("Motor", "SerialManager", port);
+		mmc.setProperty("Motor", "StopBits", "1");
+		mmc.setProperty("Motor", "Parity", "None");
+		mmc.setProperty("Motor", "BaudRate", "19200");
+		mmc.setProperty("Motor", "AnswerTimeout", "1000");
+		mmc.setProperty("Motor", "Handshaking", "Off");
+		mmc.initializeDevice("Motor");
+	} catch (Exception ex) {
+		JOptionPane.showMessageDialog(f, "Could not load: Motor from Port: " + port);
+	}
+}
+
+void disconnectMotor() { //Unload Device
+	if (checkPorts("Motor")) {
+		mmc.unloadDevice("Motor");
+	}
+}
+
+boolean checkPorts(name) { //Check to see if Device is Loaded
+	devices = mmc.getLoadedDevices();
+	for (i=0;i<devices.size();i++) {
+		if (devices.get(i).equals(name)) {return true;}
+	}
+	return false;
+}
+
+/* Labels */
+labDis = new JLabel("Angle");
+labCrit = new JLabel("TIRF at");
+labCAng = new JLabel(new DecimalFormat("#.##").format(getCrit(n1,n2)));
+lab405 = new JLabel("405");
+lab488 = new JLabel("488");
+lab561 = new JLabel("561");
+lab640 = new JLabel("640");
+labPen = new JLabel("Depth");
+
+txtAng = new JTextField("0");
+txt405d = new JTextField("405");
+txt488d = new JTextField("488");
+txt561d = new JTextField("561");
+txt640d = new JTextField("640");
+
+/* Pwr Sliders */
+JSlider slider = new JSlider(0,90,0);
+
+connectMotor(ports);
+mmc.setSerialPortCommand("Motor","1MO;" ,"\r\n");
+mmc.setSerialPortCommand("Motor","1PA0;" ,"\r\n");
+
+sliderEvent = new ChangeListener() {
+	stateChanged(event) {
+		angle = slider.getValue();
+		txtAng.setText(String.valueOf(angle));
+		if (!slider.getValueIsAdjusting()) {
+			dis = getDistance(angle);
+			print("To get: " + new DecimalFormat("#.##").format(angle) + ", distance needs to be: " + new DecimalFormat("#.##").format(dis)); //Change Distance
+			moveDis = currDis - dis; 
+			mmc.setSerialPortCommand("Motor","1PA"+ dis + ";" ,"\r\n"); //Move
+			print("1PA"+ new DecimalFormat("#.##").format(dis) + ";");
+			currDis = dis;
+			//CHANGE PENETRATION DEPTHS
+			txt405d.setText(new DecimalFormat("#").format(getDepth(405,angle, n1, n2)));
+			txt488d.setText(new DecimalFormat("#").format(getDepth(488,angle, n1, n2)));
+			txt561d.setText(new DecimalFormat("#").format(getDepth(561,angle, n1, n2)));
+			txt640d.setText(new DecimalFormat("#").format(getDepth(640,angle, n1, n2)));
+		}
+	}
+};
+
+slider.addChangeListener(sliderEvent);
+
+cp.add(labDis, new GridBagConstraints(0,0,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(slider, new GridBagConstraints(1,0,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(txtAng, new GridBagConstraints(2,0,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(labCrit, new GridBagConstraints(0,1,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(labCAng, new GridBagConstraints(1,1,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(lab405, new GridBagConstraints(1,2,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(lab488, new GridBagConstraints(2,2,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(lab561, new GridBagConstraints(3,2,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(lab640, new GridBagConstraints(4,2,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(labPen, new GridBagConstraints(0,3,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(txt405d, new GridBagConstraints(1,3,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(txt488d, new GridBagConstraints(2,3,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(txt561d, new GridBagConstraints(3,3,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+cp.add(txt640d, new GridBagConstraints(4,3,1,1,0.2,0.5,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,0,0,0), 10,10));
+
+f.pack(); 
+f.show(); 
+
+f.addWindowListener(new WindowAdapter() {
+  public void windowClosing(WindowEvent e) {
+    //MOVE MOTOR BACK
+    mmc.setSerialPortCommand("Motor","1PA0;" ,"\r\n");
+	 disconnectMotor();
+    f.dispose();
+  }
+});
