@@ -39,6 +39,7 @@ CAM | Photometrics Prime BSI sCMOS
 Micromanager 1.4
 
 ## TODO:
+* filter cube  
 * software requirements
 	*make folder
 	*shutter code, laser control code, micromanager config
