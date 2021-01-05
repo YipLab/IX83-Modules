@@ -4,7 +4,7 @@ Traditional Single Molecule Localization Micrsocopy (SMLM) techniques have gener
 
 
 <p align="center">
-	<img src="https://github.com/YipLab/IX83-Modules/blob/master/CylindricalSMLM/images/schematic.png" alt="CylindricalSMLM schematic" width="50%">
+	<img src="/images/schematic.png" alt="CylindricalSMLM schematic" width="50%">
 </p>
 
 
