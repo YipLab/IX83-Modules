@@ -4,7 +4,7 @@ Single Molecule Localization Microscopy (SMLM) is a super-resolution technique t
 
 
 <p align="center">
-	<img src="https://github.com/YipLab/IX83-Modules/blob/master/HyperspectralSMLM/images/schematic.png" alt="Hyperspectral SMLM schematic" width="70%">
+	<img src="/images/schematic.png" alt="Hyperspectral SMLM schematic" width="70%">
 </p>
 
 

@@ -3,7 +3,7 @@
 This module observes the fluoresence emission polarization. An [Optosplit II](https://www.cairn-research.co.uk/product/optosplit-ii/) was used to separate parallel and perpendicular emissions onto the camera sensor. Post processing is then used to split the image and extract ratiometric information.
 
 <p align="center">
-	<img src="https://github.com/YipLab/IX83-Modules/blob/master/FAIM/images/schematic.png" alt="FAIM Schematic" width="50%">
+	<img src="/images/schematic.png" alt="FAIM Schematic" width="50%">
 </p>
 
 

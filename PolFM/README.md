@@ -4,7 +4,7 @@ Most fluorophores have a preferential polarization.  Hence fluorophore orientati
 
 
 <p align="center">
-	<img src="https://github.com/YipLab/IX83-Modules/blob/master/PolFM/images/schematic.png" alt="PFM Schematic" width="75%">
+	<img src="/images/schematic.png" alt="PFM Schematic" width="75%">
 </p>
 
 
