@@ -3,7 +3,7 @@
 Supercritical Angle Fluorescence (SAF) imaging is a multipurpose technique that can be used to detect fluoresence emissions close to the cover glass surface and make inferences with regards to sample adhesion to the coverglass, refractive index changes within a cell. These observations can be made by looking at the back focal plane of the sample.
 
 
-![SAF Schematic](/images/schematic.png)
+![SAF Schematic](/SAF/images/schematic.png)
 
 
 The RF module is placed in the 2nd slot of the microscope body (Mod_Em1). It consists of a lens mounted on a servo motor. A motorized system allows the toggling between the acqusition of a regular image and a SAF image. The SAF images can be analyzed with the python class to acquire radial and circumferential profiles of the SAF images.
