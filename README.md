@@ -3,7 +3,7 @@
 Modules enable different microscopy techniques to be applied on the same optical system. Modules are inserted into designated modular spaces the IX83 system. Detailed description of the modules can be found in their respective folders.
 
 
-![System Schematic](/images/schematic.png)
+![System Schematic](/SAF/images/schematic.png)
 
 
 The system has 4 free spaced lasers that are aligned using a laser combiner. The beam profile can be manipulated in to modular exciation areas(Mod_Ex). The beam is then expanded and focused to the back focal plane of the objective.

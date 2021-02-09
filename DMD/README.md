@@ -4,7 +4,7 @@ The module adds a Digital Mirror Device (DMD) into the excitation beam path. Thi
 
 
 <p align="center">
-	<img src="/images/schematic.png" alt="DMD Schematic" width="30%">
+	<img src="/DMD/images/schematic.png" alt="DMD Schematic" width="30%">
 </p>
 
 
