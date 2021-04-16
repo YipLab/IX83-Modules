@@ -33,7 +33,7 @@ IX83 | Olympus IX83 Dual Deck
 100x | Olympus UApoN 100x/1.49 Oil  
 
 ### Filter Cube  
-Quad band | Chroma TRF89901-EMv2-OL3  
+Quad band | Chroma ([TRF89901-EMv2-OL3](https://www.chroma.com/products/sets/trf89901-emv2-et-405-488-561-640nm-laser-quad-band-set-for-tirf-applications))  
 
 ### Camera
 CAM | Photometrics Prime BSI sCMOS
