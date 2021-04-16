@@ -32,6 +32,9 @@ IX83 | Olympus IX83 Dual Deck
 60x | Olympus PlanApo 60x/1.4 Oil  
 100x | Olympus UApoN 100x/1.49 Oil  
 
+### Filter Cube  
+Quad band | Chroma TRF89901-EMv2-OL3  
+
 ### Camera
 CAM | Photometrics Prime BSI sCMOS
 
@@ -39,7 +42,6 @@ CAM | Photometrics Prime BSI sCMOS
 Micromanager 1.4
 
 ## TODO:
-* filter cube  
 * software requirements
 	*make folder
 	*shutter code, laser control code, micromanager config
