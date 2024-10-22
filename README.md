@@ -16,7 +16,7 @@ There are two modular emission areas(Mod_Em), this permits image manipulation be
 405 Laser | Coherent Cube 405 nm 25 mW  
 488 Laser | Coherent Sapphire 488 nm 200 mW  
 561 Laser | Laser Quantum GEM 561 nm 200 mW  
-647 Laser | Laser Glow 647 nm 200 mW  
+647 Laser | Coherent OBIS 637 nm 160 mW  
 
 ### Optics
 L1 | Achromatic Doublet f = 30 mm ([AC254-030-A-ML](https://www.thorlabs.com/thorproduct.cfm?partnumber=AC254-030-A-ML))    
